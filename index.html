@@ -1,326 +1,136 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karad Division Report Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🏤 Karad Division Report Generator</h1>
+            <p class="subtitle">Upload the 9 source files to generate the complete performance report</p>
+            <div class="kpi-summary">
+                <span>🎯 Delivery KPI: 90%</span>
+                <span>📱 DSS KPI: 90%</span>
+                <span>💳 COD Digital KPI: 80%</span>
+                <span>📮 LB Clearance KPI: 100%</span>
+            </div>
+        </header>
 
-body {
-    font-family: Arial, sans-serif;
-    background: #eef2f7;
-    padding: 20px;
-    color: #1a2a3a;
-}
+        <!-- File Upload Area -->
+        <div class="upload-section">
+            <h2>📁 Upload Source Files</h2>
+            <p class="instruction">Upload all 9 files. The system will automatically join them by Office ID.</p>
+            
+            <div class="file-grid">
+                <!-- Delivery Range -->
+                <div class="file-input-group">
+                    <label class="file-label required">📦 Delivery (Range)</label>
+                    <input type="file" class="file-input" id="delRange" accept=".csv">
+                    <span class="file-status" id="delRange-status">❌ Not uploaded</span>
+                    <small>Expected: Del_01-11.csv</small>
+                </div>
 
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
+                <!-- Delivery Single -->
+                <div class="file-input-group">
+                    <label class="file-label required">📦 Delivery (Latest)</label>
+                    <input type="file" class="file-input" id="delSingle" accept=".csv">
+                    <span class="file-status" id="delSingle-status">❌ Not uploaded</span>
+                    <small>Expected: Del_11.csv</small>
+                </div>
 
-/* Header */
-header {
-    border-bottom: 3px solid #1a3a5c;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-}
+                <!-- DSS Range -->
+                <div class="file-input-group">
+                    <label class="file-label required">📱 DSS (Range)</label>
+                    <input type="file" class="file-input" id="dssRange" accept=".csv">
+                    <span class="file-status" id="dssRange-status">❌ Not uploaded</span>
+                    <small>Expected: DSS_01-11.csv</small>
+                </div>
 
-h1 {
-    color: #1a3a5c;
-    font-size: 32px;
-    margin-bottom: 8px;
-}
+                <!-- DSS Single -->
+                <div class="file-input-group">
+                    <label class="file-label required">📱 DSS (Latest)</label>
+                    <input type="file" class="file-input" id="dssSingle" accept=".csv">
+                    <span class="file-status" id="dssSingle-status">❌ Not uploaded</span>
+                    <small>Expected: DSS_11.csv</small>
+                </div>
 
-.subtitle {
-    color: #5a6a7a;
-    font-size: 16px;
-    margin-bottom: 15px;
-}
+                <!-- CODD Range -->
+                <div class="file-input-group">
+                    <label class="file-label required">💳 COD Digital (Range)</label>
+                    <input type="file" class="file-input" id="codRange" accept=".csv">
+                    <span class="file-status" id="codRange-status">❌ Not uploaded</span>
+                    <small>Expected: CODD_01-11.csv</small>
+                </div>
 
-.kpi-summary {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    background: #f0f4f9;
-    padding: 12px 20px;
-    border-radius: 8px;
-}
+                <!-- CODD Single -->
+                <div class="file-input-group">
+                    <label class="file-label required">💳 COD Digital (Latest)</label>
+                    <input type="file" class="file-input" id="codSingle" accept=".csv">
+                    <span class="file-status" id="codSingle-status">❌ Not uploaded</span>
+                    <small>Expected: CODD_11.csv</small>
+                </div>
 
-.kpi-summary span {
-    font-size: 14px;
-    font-weight: 600;
-    color: #1a3a5c;
-}
+                <!-- LB Range -->
+                <div class="file-input-group">
+                    <label class="file-label required">📮 LB Clearance (Range)</label>
+                    <input type="file" class="file-input" id="lbRange" accept=".csv">
+                    <span class="file-status" id="lbRange-status">❌ Not uploaded</span>
+                    <small>Expected: LB Clearance_01-11.csv</small>
+                </div>
 
-/* Upload Section */
-.upload-section {
-    margin-bottom: 30px;
-}
+                <!-- LB Single -->
+                <div class="file-input-group">
+                    <label class="file-label required">📮 LB Clearance (Latest)</label>
+                    <input type="file" class="file-input" id="lbSingle" accept=".csv">
+                    <span class="file-status" id="lbSingle-status">❌ Not uploaded</span>
+                    <small>Expected: LB Clearance_11.csv</small>
+                </div>
 
-.upload-section h2 {
-    color: #1a3a5c;
-    font-size: 22px;
-    margin-bottom: 6px;
-}
+                <!-- Office Master -->
+                <div class="file-input-group file-master">
+                    <label class="file-label required">📋 Office Master File</label>
+                    <input type="file" class="file-input" id="masterFile" accept=".xlsx,.xls">
+                    <span class="file-status" id="masterFile-status">❌ Not uploaded</span>
+                    <small>Expected: Office_Master_File_11.06.2026.xlsx</small>
+                </div>
+            </div>
 
-.instruction {
-    color: #6a7a8a;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="generateBtn" class="btn btn-primary" disabled>🚀 Generate Report</button>
+                <button id="clearBtn" class="btn btn-secondary">🗑️ Clear All</button>
+            </div>
+        </div>
 
-.file-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 25px;
-}
+        <!-- Status / Progress Area -->
+        <div id="statusArea" class="status-area" style="display: none;">
+            <div class="status-header">
+                <h3>📊 Processing Status</h3>
+                <span id="progressText">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+            </div>
+            <div id="statusMessages" class="status-messages"></div>
+        </div>
 
-.file-input-group {
-    background: #f8fafc;
-    padding: 16px;
-    border-radius: 10px;
-    border: 2px solid #e2e8f0;
-    transition: all 0.2s;
-}
+        <!-- Download Section -->
+        <div id="downloadArea" class="download-area" style="display: none;">
+            <div class="download-success">
+                <span class="success-icon">✅</span>
+                <h3>Report Generated Successfully!</h3>
+                <p id="downloadSummary"></p>
+                <button id="downloadBtn" class="btn btn-success">📥 Download Excel Report</button>
+            </div>
+        </div>
+    </div>
 
-.file-input-group:hover {
-    border-color: #b0c4de;
-}
-
-.file-input-group.file-master {
-    grid-column: 1 / -1;
-    border-color: #1a3a5c;
-    background: #f0f4f9;
-}
-
-.file-label {
-    display: block;
-    font-weight: 700;
-    font-size: 14px;
-    color: #2a3a4a;
-    margin-bottom: 6px;
-}
-
-.file-label.required::after {
-    content: " *";
-    color: #d32f2f;
-}
-
-.file-input {
-    display: block;
-    width: 100%;
-    padding: 8px 0;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-.file-status {
-    display: inline-block;
-    margin-top: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 2px 10px;
-    border-radius: 12px;
-}
-
-.file-status.uploaded {
-    color: #2e7d32;
-    background: #e8f5e9;
-}
-
-.file-status.not-uploaded {
-    color: #c62828;
-    background: #ffebee;
-}
-
-small {
-    display: block;
-    color: #8a9aaa;
-    font-size: 11px;
-    margin-top: 4px;
-}
-
-/* Action Buttons */
-.action-buttons {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    padding-top: 10px;
-    border-top: 2px solid #eef2f7;
-}
-
-.btn {
-    padding: 12px 32px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: Arial, sans-serif;
-}
-
-.btn-primary {
-    background: #1a3a5c;
-    color: white;
-}
-
-.btn-primary:hover:not(:disabled) {
-    background: #0f2a44;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(26,58,92,0.3);
-}
-
-.btn-primary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.btn-secondary {
-    background: #e8ecf0;
-    color: #3a4a5a;
-}
-
-.btn-secondary:hover {
-    background: #d5dce4;
-}
-
-.btn-success {
-    background: #2e7d32;
-    color: white;
-    font-size: 18px;
-    padding: 16px 40px;
-}
-
-.btn-success:hover {
-    background: #1b5e20;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(46,125,50,0.3);
-}
-
-/* Status Area */
-.status-area {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px 0;
-    border: 2px solid #e2e8f0;
-}
-
-.status-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.status-header h3 {
-    color: #1a3a5c;
-    font-size: 16px;
-}
-
-#progressText {
-    font-weight: 700;
-    color: #1a3a5c;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 12px;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #1a3a5c, #4a8ab5);
-    transition: width 0.3s ease;
-    width: 0%;
-}
-
-.status-messages {
-    max-height: 200px;
-    overflow-y: auto;
-    font-size: 13px;
-    color: #2a3a4a;
-}
-
-.status-messages .message {
-    padding: 4px 0;
-    border-bottom: 1px solid #eef2f7;
-}
-
-.status-messages .message.success {
-    color: #2e7d32;
-}
-
-.status-messages .message.error {
-    color: #c62828;
-}
-
-.status-messages .message.info {
-    color: #0d47a1;
-}
-
-/* Download Area */
-.download-area {
-    background: #e8f5e9;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    border: 2px solid #a5d6a7;
-    margin-top: 20px;
-}
-
-.download-success .success-icon {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.download-success h3 {
-    color: #1b5e20;
-    font-size: 24px;
-    margin-bottom: 8px;
-}
-
-.download-success p {
-    color: #2a4a2a;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .container {
-        padding: 16px;
-    }
-    
-    h1 {
-        font-size: 24px;
-    }
-    
-    .file-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .kpi-summary {
-        flex-direction: column;
-        gap: 4px;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-        text-align: center;
-    }
-}
+    <!-- Include SheetJS for Excel generation -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
